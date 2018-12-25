@@ -4,7 +4,7 @@ const cors = require("cors"); //checking it later
 const mongoose = require("mongoose");
 const app = express();
 const PORT = 3000;
-
+const user = require("../routes/routes");
 // middleware
 app.use(bodyParser.json());
 app.use((req, res, next) => {
@@ -25,6 +25,8 @@ mongoose.connect(
     !err ? console.log("Connection success") : console.log(err);
   }
 );
+
+// connecting routes
 
 app.listen(PORT, () => {
   console.log(`Server up on ${PORT}`);
