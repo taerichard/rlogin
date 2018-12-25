@@ -1,24 +1,33 @@
 const express = require("express");
-const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-
+const cors = require("cors"); //checking it later
+const mongoose = require("mongoose");
 const app = express();
+const PORT = 3000;
 
 // middleware
-app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use((req, res, next) => {
+  const date = new Date();
+  console.log(`${req.method} request made on ${date}`);
+  next();
+});
 
-// DB
-const db = require("./config/key.js").mongoURI;
+// mongo
+const options = {
+  useNewUrlParser: true
+};
+const mongoURI = `mongodb://meanrichard:Shibalnom1989$$@ds243054.mlab.com:43054/users_db`;
+mongoose.connect(
+  mongoURI,
+  options,
+  err => {
+    !err ? console.log("Connection success") : console.log(err);
+  }
+);
 
-// connecting to MongoDB
-mongoose
-  .connect(
-    db,
-    { useNewUrlParser: true }
-  )
-  .then(() => console.log("MongoDB connected"))
-  .catch(err => console.log(err));
+app.listen(PORT, () => {
+  console.log(`Server up on ${PORT}`);
+});
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}!`));
+module.exports = app;
