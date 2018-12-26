@@ -5,6 +5,8 @@ const mongoose = require("mongoose");
 const app = express();
 const PORT = 3000;
 const user = require("../routes/routes");
+const router = require("../routes/routes");
+
 // middleware
 app.use(bodyParser.json());
 app.use((req, res, next) => {
@@ -26,7 +28,8 @@ mongoose.connect(
   }
 );
 
-// connecting routes
+// routes
+app.use(router);
 
 app.listen(PORT, () => {
   console.log(`Server up on ${PORT}`);

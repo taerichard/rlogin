@@ -1,26 +1,19 @@
 const router = require("express").Router();
+const mongoose = require("mongoose");
 const User = require("../models/Users");
-console.log(router);
+
 router.get("/", function(req, res) {
-  res.send({ success: "success!" });
+  res.send("User");
 });
 
-// router.get("api/models", function(req, res) {
-//   User.find({}, function(err, model) {
-//     if (err) {
-//       res.send({ err: "Error retrieving data" });
-//     }
-//     res.send({ message: "success", data: model });
-//   });
-// });
-// Post
-// router.post("/signup", (req, res, next), function(){
-//   const newUser = new User({
-//     name: req.body.name,
-//     email: req.body.email,
-//     password: req.body.password
-//   });
-
-// // })
-
+router.post("api/register", function(req, res) {
+  const newUser = new User({
+    name: req.body.name,
+    email: req.body.email,
+    password: req.body.password
+  });
+  User.create(newUser, function(err, user) {
+    res.send({ newUser }).catch(err => console.log(err));
+  });
+});
 module.exports = router;
