@@ -1,5 +1,19 @@
-const router = require("../server/server");
+const router = require("express").Router();
+const mongoose = require("mongoose");
+const User = require("../models/Users");
 
-module.exports = function loginRoutes() {
-  router.get("/", (req, res, next), function() {});
-};
+router.get("/", function(req, res) {
+  res.send("User");
+});
+
+router.post("api/register", function(req, res) {
+  const newUser = new User({
+    name: req.body.name,
+    email: req.body.email,
+    password: req.body.password
+  });
+  User.create(newUser, function(err, user) {
+    res.send({ newUser }).catch(err => console.log(err));
+  });
+});
+module.exports = router;
