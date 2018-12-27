@@ -6,14 +6,11 @@ const app = express();
 const PORT = 3000;
 const user = require("../routes/routes");
 const router = require("../routes/routes");
+const logger = require("../middleware/logger");
 
 // middleware
 app.use(bodyParser.json());
-app.use((req, res, next) => {
-  const date = new Date();
-  console.log(`${req.method} request made on ${date}`);
-  next();
-});
+app.use(logger);
 
 // mongo
 const options = {
