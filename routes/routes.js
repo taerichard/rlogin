@@ -47,11 +47,25 @@ router.post("/register", function(req, res) {
     email: req.body.email
     // password: req.body.password,
   });
-  newUser.save();
-  console.log(newUser);
-  res.end("nice");
+  newUser
+    .save()
+    .then(data => {
+      res.status(200).send({ success: data });
+    })
+    .catch(err => {
+      if (err) {
+        res.status(500).send({ errorMessage: err });
+      }
+    });
 });
 
-router.delete("/register");
-
+// deleting users
+router.delete("/users/:id", function(req, res) {
+  User.remove({ _id: req.params.id }, function(err, user) {
+    if (err) {
+      res.status(500).send({ errorMessage: err });
+    }
+    res.status(200).send({ success: user });
+  });
+});
 module.exports = router;
