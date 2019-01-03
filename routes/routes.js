@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const User = require("../models/Users");
+const bcrypt = require("bcrypt");
 
 // getting all users
 router.get("/users", function(req, res) {
@@ -44,19 +45,21 @@ router.put("/users/:id", function(req, res) {
 router.post("/register", function(req, res) {
   const newUser = new User({
     name: req.body.name,
-    email: req.body.email
-    // password: req.body.password,
+    email: req.body.email,
+    password: req.body.password
   });
-  newUser
-    .save()
-    .then(data => {
-      res.status(200).send({ success: data });
-    })
-    .catch(err => {
+
+  const saltRounds = 10;
+  newUser.save().then(user => {
+    bcrypt.hash(user.password, saltRounds, function(err, hash) {
       if (err) {
         res.status(500).send({ errorMessage: err });
+      } else {
+        user.password = hash;
+        return user.password;
       }
     });
+  });
 });
 
 // deleting users
