@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 const UserSchema = new mongoose.Schema({
@@ -15,9 +14,35 @@ const UserSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true
-  }
+  },
+  tokens: [
+    {
+      access: {
+        type: String,
+        required: true
+      },
+      token: {
+        type: String,
+        required: true
+      }
+    }
+  ]
 });
 
-// on save hook, encrypt password
+// generate Auth Token function
+UserSchema.methods.generateAuthToken = function() {
+  let user = this;
+  let access = "auth";
+  let token = jwt
+    .sign({ _id: user._id.toHexString(), access }, "richard")
+    .toString();
+  // user.tokens = user.tokens.concat([{ access, token }]);
+  user.tokens.push({ access, token });
+  user.save().then(() => {
+    console.log("tokenn", token);
+    return token;
+  });
+};
 
+// on save hook, encrypt password
 module.exports = mongoose.model("userschema", UserSchema);
