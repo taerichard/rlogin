@@ -30,19 +30,19 @@ const UserSchema = new mongoose.Schema({
 });
 
 // generate Auth Token function
-UserSchema.methods.generateAuthToken = function() {
-  let user = this;
-  let access = "auth";
-  let token = jwt
-    .sign({ _id: user._id.toHexString(), access }, "richard")
-    .toString();
-  // user.tokens = user.tokens.concat([{ access, token }]);
-  user.tokens.push({ access, token });
-  user.save().then(() => {
-    console.log("tokenn", token);
-    return token;
-  });
-};
+// UserSchema.methods.generateAuthToken = function() {
+//   let user = this;
+//   let access = "auth";
+//   let token = jwt
+//     .sign({ _id: user._id.toHexString(), access }, "richard")
+//     .toString();
+//   // user.tokens = user.tokens.concat([{ access, token }]);
+//   user.tokens.push({ access, token });
+//   user.save().then(() => {
+//     console.log("tokenn", token);
+//     return token;
+//   });
+// };
 
 // on save hook, encrypt password
 module.exports = mongoose.model("userschema", UserSchema);
