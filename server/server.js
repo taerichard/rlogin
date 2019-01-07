@@ -1,11 +1,10 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const cors = require("cors"); //checking it later
+// const cors = require("cors"); //checking it later
 const mongoose = require("mongoose");
 const app = express();
 const PORT = process.env.PORT || 3000;
 const user = require("../routes/routes");
-const router = require("../routes/routes");
 const logger = require("../middleware/logger");
 
 // middleware
@@ -24,9 +23,7 @@ mongoose.connect(
     !err ? console.log("Connection success") : console.log(err);
   }
 );
-
-// routes
-app.use(router);
+require("../routes/routes")(app);
 
 app.listen(PORT, () => {
   console.log(`Server up on ${PORT}`);
