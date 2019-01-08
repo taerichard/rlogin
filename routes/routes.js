@@ -46,25 +46,16 @@ module.exports = app => {
       email: req.body.email,
       password: req.body.password
     });
+
     newUser
-      .save()
-      .then(user => {
-        res.status(200).send(user);
+      .generateAuthToken()
+      .then(savedUser => {
+        console.log("after generateFUnction", savedUser);
+        res.status(200).send({ token: savedUser.tokens });
       })
       .catch(err => {
         res.status(400).send(err);
       });
-    // .then(() => {
-    //   console.log("after save");
-    //   return newUser.generateAuthToken();
-    // })
-    // .then(token => {
-    //   console.log("after generateFUnction", token);
-    //   res.status(200).send("success");
-    // })
-    // .catch(err => {
-    //   res.status(400).send(err);
-    // });
   });
   // deleting users
   app.delete("/users/:id", function(req, res) {
