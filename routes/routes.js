@@ -50,8 +50,7 @@ module.exports = app => {
     newUser
       .generateAuthToken()
       .then(savedUser => {
-        console.log("after generateFUnction", savedUser);
-        res.status(200).send({ token: savedUser.tokens });
+        res.status(200).send({ token: savedUser.tokens.pop().token });
       })
       .catch(err => {
         res.status(400).send(err);
