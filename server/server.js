@@ -2,10 +2,9 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const app = express();
-
-const user = require("../routes/routes");
 const logger = require("../middleware/logger");
 const keys = require("../configuration/keys");
+
 // middleware
 app.use(bodyParser.json());
 app.use(logger);
@@ -22,7 +21,7 @@ mongoose.connect(
   }
 );
 require("../routes/routes")(app);
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server up on ${PORT}`);
 });
