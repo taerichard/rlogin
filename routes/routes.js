@@ -1,4 +1,5 @@
 const User = require("../models/Users");
+const uniqueUser = require("../middleware/uniqueUser.js");
 
 module.exports = app => {
   // getting all users
@@ -40,7 +41,7 @@ module.exports = app => {
       });
   });
 
-  app.post("/register", function(req, res) {
+  app.post("/register", uniqueUser, function(req, res) {
     const newUser = new User({
       name: req.body.name,
       email: req.body.email,
@@ -50,6 +51,7 @@ module.exports = app => {
     newUser
       .generateAuthToken()
       .then(savedUser => {
+        console.log(savedUser);
         res.status(200).send({
           name: savedUser.name,
           email: savedUser.email,
