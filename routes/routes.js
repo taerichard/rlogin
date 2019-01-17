@@ -1,5 +1,5 @@
 const User = require("../models/Users");
-const uniqueUser = require("../middleware/uniqueUser.js");
+// const uniqueUser = require("../middleware/uniqueUser.js");
 
 module.exports = app => {
   // getting all users
@@ -41,7 +41,7 @@ module.exports = app => {
       });
   });
 
-  app.post("/register", uniqueUser, function(req, res) {
+  app.post("/register", function(req, res) {
     const newUser = new User({
       name: req.body.name,
       email: req.body.email,
