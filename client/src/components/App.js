@@ -1,30 +1,18 @@
 import React, { Component } from "react";
 import Header from "./Header";
 import LoginForm from "./LoginForm";
-export default class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      result: []
-    };
-  }
-
-  handleSubmit(event) {
-    event.preventDefault();
-    this.setState({
-      ...this.state,
-      result: [...this.state]
-    });
-  }
+class App extends Component {
+  handleSubmit = (username, password) => {
+    console.log(username, password);
+  };
   render() {
     return (
       <div>
         <Header />
-        <LoginForm
-          onSubmit={this.handleSubmit}
-          onChange={this.handleOnchange}
-        />
+        <LoginForm onSubmit={this.handleSubmit} />
       </div>
     );
   }
 }
+
+export default App;
