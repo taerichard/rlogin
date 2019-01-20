@@ -7,26 +7,19 @@ class LoginForm extends Component {
     event.preventDefault();
     this.props.onSubmit(this.state.username, this.state.password);
   };
-  handleUsernameOnChange = event => {
-    console.log("fdsa");
-    this.setState({ username: event.target.value });
-  };
-  handlePasswordOnChange = event => {
-    console.log("pw");
-    this.setState({ password: event.target.value });
-  };
+
   render() {
     return (
       <div>
         <form onSubmit={this.onFormSubmit}>
           <input
             type="text"
-            onChange={this.handleUsernameOnChange}
+            onChange={e => this.setState({ username: e.target.value })}
             value={this.state.username}
           />
           <input
             type="password"
-            onChange={this.handlePasswordOnChange}
+            onChange={e => this.setState({ password: e.target.value })}
             value={this.state.password}
             name="password"
           />
