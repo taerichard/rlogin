@@ -47,7 +47,7 @@ module.exports = app => {
       email: req.body.email,
       password: req.body.password
     });
-
+    console.log("api");
     newUser
       .generateAuthToken()
       .then(savedUser => {
@@ -59,9 +59,24 @@ module.exports = app => {
         });
       })
       .catch(err => {
+        console.log(err);
         res.status(400).send(err);
       });
   });
+  // users logging in
+  app.post("/loggin", function(req, res) {
+    const user = {
+      name: req.body.name,
+      email: req.body.email,
+      password: req.body.password
+    };
+    User.findById(user._id)
+      .then(user => {
+        console.log(user);
+      })
+      .catch(err => console.log("ERRROR", err));
+  });
+
   // deleting users
   app.delete("/users/:id", function(req, res) {
     User.remove({ _id: req.params.id }, function(err, user) {
