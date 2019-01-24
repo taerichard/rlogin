@@ -42,7 +42,6 @@ module.exports = app => {
   });
 
   app.post("/register", function(req, res) {
-    console.log("inside post back")
     const newUser = new User({
       name: req.body.name,
       email: req.body.email,
@@ -71,7 +70,7 @@ module.exports = app => {
       email: req.body.email,
       password: req.body.password
     };
-    User.findBy()
+    User.find({ name: user.name, email: user.email, password: user.password })
       .then(user => {
         console.log(user);
       })
