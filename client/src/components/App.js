@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import Header from "./Header";
 import Register from "./Register";
-import axios from "axios";
-
+import unsplash from "../api/unsplash";
 class App extends Component {
   handleSubmit = (username, password, email) => {
-    axios
+    unsplash
       .post("/register", {
         name: username,
         password: password,
