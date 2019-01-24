@@ -17,26 +17,30 @@ class Register extends Component {
     return (
       <div>
         <form onSubmit={this.onFormSubmit}>
-          <Input
-            icon
-            onChange={e => this.setState({ username: e.target.value })}
-            value={this.state.username}
-            placeholder="Username"
-          />
+          <Input icon placeholder="email">
+            <Icon name="mail" />
+            <input
+              onChange={e => this.setState({ email: e.target.value })}
+              value={this.state.email}
+            />
+          </Input>
           <div>
             <Input
               icon
+              onChange={e => this.setState({ username: e.target.value })}
+              value={this.state.username}
+              placeholder="Username"
+            />
+          </div>
+          <div>
+            <Input
+              icon
+              placeholder="Password"
               type="password"
               onChange={e => this.setState({ password: e.target.value })}
               value={this.state.password}
             />
-            <Input icon placeholder="email">
-              <Icon name="mail" />
-              <input
-                onChange={e => this.setState({ email: e.target.value })}
-                value={this.state.email}
-              />
-            </Input>
+
             <input type="submit" />
           </div>
         </form>
