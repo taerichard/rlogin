@@ -64,19 +64,38 @@ module.exports = app => {
       });
   });
   // users logging in
-  app.post("/loggin", function(req, res) {
+  // app.post("/loggin", function(req, res) {
+  //   const user = {
+  //     name: req.body.name,
+  //     email: req.body.email,
+  //     password: req.body.password
+  //   };
+  //   User.find({ name: user.name, email: user.email, password: user.password })
+  //     .then(user => {
+  //       res.status(200).send(user);
+  //     })
+  //     .catch(err => {
+  //       res.status(500).send({ errorMessage: err });
+  //     });
+  // });
+  app.post("/loggin", (req, res) => {
     const user = {
       name: req.body.name,
       email: req.body.email,
       password: req.body.password
     };
-    User.find({ name: user.name, email: user.email, password: user.password })
-      .then(user => {
-        res.status(200).send(user);
-      })
-      .catch(err => {
-        res.status(500).send({ errorMessage: err });
-      });
+    User.find(
+      { name: user.name, email: req.body.email, password: req.body.password },
+      (err, docs) => {
+        if (err) {
+          res.status(400).send({ errorMessage: err });
+        } else if (docs.length === 0) {
+          res.send("No user was found");
+        } else if (docs) {
+          res.status(200).send(docs);
+        }
+      }
+    );
   });
 
   // deleting users
