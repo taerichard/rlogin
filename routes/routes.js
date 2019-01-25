@@ -85,7 +85,7 @@ module.exports = app => {
       password: req.body.password
     };
     User.find(
-      { name: user.name, email: req.body.email, password: req.body.password },
+      { email: req.body.email, password: req.body.password },
       (err, docs) => {
         if (err) {
           res.status(400).send({ errorMessage: err });

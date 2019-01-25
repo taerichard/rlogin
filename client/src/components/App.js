@@ -4,7 +4,7 @@ import Register from "./Register";
 import Login from "./Login";
 import unsplash from "../api/unsplash";
 class App extends Component {
-  handleSubmit = (username, password, email) => {
+  handleRegisterSubmit = (username, password, email) => {
     unsplash
       .post("/register", {
         name: username,
@@ -16,12 +16,21 @@ class App extends Component {
       })
       .catch(err => console.log(err));
   };
+  handleLoginSubmit = (email, password) => {
+    unsplash
+      .post("/loggin", {
+        email,
+        password
+      })
+      .then(response => console.log(response))
+      .catch(err => console.log(err));
+  };
   render() {
     return (
       <div>
         <Header />
-        <Register onSubmit={this.handleSubmit} />
-        <Login />
+        <Register onSubmit={this.handleRegisterSubmit} />
+        <Login onSubmit={this.handleLoginSubmit} />
       </div>
     );
   }
