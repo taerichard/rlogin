@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Header from "./Header";
 import Register from "./Register";
+import Login from "./Login";
 import unsplash from "../api/unsplash";
 class App extends Component {
   handleSubmit = (username, password, email) => {
@@ -20,6 +21,7 @@ class App extends Component {
       <div>
         <Header />
         <Register onSubmit={this.handleSubmit} />
+        <Login />
       </div>
     );
   }
