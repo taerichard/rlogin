@@ -72,9 +72,11 @@ module.exports = app => {
     };
     User.find({ name: user.name, email: user.email, password: user.password })
       .then(user => {
-        console.log(user);
+        res.status(200).send(user);
       })
-      .catch(err => console.log("ERRROR", err));
+      .catch(err => {
+        res.status(500).send({ errorMessage: err });
+      });
   });
 
   // deleting users
