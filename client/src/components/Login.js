@@ -24,12 +24,14 @@ class Login extends Component {
             onChange={this.handleOnChange}
             name="email"
           />
-          <input
-            placeholder="password"
-            value={this.state.password}
-            onChange={this.handleOnChange}
-            name="password"
-          />
+          <div>
+            <input
+              placeholder="password"
+              value={this.state.password}
+              onChange={this.handleOnChange}
+              name="password"
+            />
+          </div>
           <input type="submit" />
         </form>
       </div>
