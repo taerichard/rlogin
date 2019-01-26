@@ -3,6 +3,7 @@ import Header from "./Header";
 import Register from "./Register";
 import Login from "./Login";
 import unsplash from "../api/unsplash";
+import "./regLog.css";
 class App extends Component {
   handleRegisterSubmit = (username, password, email) => {
     unsplash
@@ -27,10 +28,19 @@ class App extends Component {
   };
   render() {
     return (
-      <div>
-        <Header />
-        <Register onSubmit={this.handleRegisterSubmit} />
-        <Login onSubmit={this.handleLoginSubmit} />
+      <div className="container">
+        <div className="header">
+          <Header />
+        </div>
+
+        <div className="register">
+          <h4 className="register-message">Create Your Account</h4>
+          <Register onSubmit={this.handleRegisterSubmit} />
+        </div>
+        <div className="loggin">
+          <h4 className="loggin-message">Login With Your Account</h4>
+          <Login onSubmit={this.handleLoginSubmit} />
+        </div>
       </div>
     );
   }
