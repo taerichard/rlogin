@@ -2,6 +2,9 @@ const User = require("../models/Users");
 // const uniqueUser = require("../middleware/uniqueUser.js");
 
 module.exports = app => {
+  app.get("/weed", (req, res) => {
+    res.send("hey");
+  });
   // getting all users
   app.get("/users", function(req, res) {
     User.find()
@@ -55,7 +58,7 @@ module.exports = app => {
         res.status(200).send({
           name: savedUser.name,
           email: savedUser.email,
-          token: savedUser.tokens.pop().token
+          token: savedUser.token
         });
       })
       .catch(err => {
@@ -84,6 +87,7 @@ module.exports = app => {
       email: req.body.email,
       password: req.body.password
     };
+    console.log(req.headers);
     User.find(
       { email: req.body.email, password: req.body.password },
       (err, docs) => {

@@ -15,18 +15,10 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  tokens: [
-    {
-      access: {
-        type: String,
-        required: true
-      },
-      token: {
-        type: String,
-        required: true
-      }
-    }
-  ]
+  token: {
+    type: String,
+    required: true
+  }
 });
 
 // generate Auth Token function
@@ -37,7 +29,7 @@ UserSchema.methods.generateAuthToken = function() {
     .sign({ _id: user._id.toHexString(), access }, "richard")
     .toString();
   // user.tokens = user.tokens.concat([{ access, token }]);
-  user.tokens.push({ access, token });
+  user.token = token;
   return user.save();
 };
 
