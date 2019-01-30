@@ -1,5 +1,5 @@
-// when users are trying to loggin
 import React, { Component } from "react";
+import "./Login.css";
 
 class Login extends Component {
   constructor(props) {
@@ -16,23 +16,28 @@ class Login extends Component {
   };
   render() {
     return (
-      <div>
+      <div className="loggin-container">
         <form onSubmit={this.handleOnSubmit}>
+          <h3>Loggin To Your Account</h3>
           <input
-            placeholder="email"
+            className="ui medium input"
+            placeholder="Email"
             value={this.state.email}
             onChange={this.handleOnChange}
             name="email"
           />
           <div>
             <input
-              placeholder="password"
+              className="ui medium input"
+              placeholder="Password"
               value={this.state.password}
               onChange={this.handleOnChange}
               name="password"
             />
           </div>
-          <input type="submit" />
+          <button style={{ marginTop: "10px" }} className="mini ui button">
+            Loggin
+          </button>
         </form>
       </div>
     );

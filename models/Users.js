@@ -28,10 +28,10 @@ UserSchema.methods.generateAuthToken = function() {
   let token = jwt
     .sign({ _id: user._id.toHexString(), access }, "richard")
     .toString();
-  // user.tokens = user.tokens.concat([{ access, token }]);
+  console.log("access,", access);
+
   user.token = token;
   return user.save();
 };
 
-// on save hook, encrypt password
 module.exports = mongoose.model("userschema", UserSchema);
