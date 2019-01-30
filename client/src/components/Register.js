@@ -15,31 +15,38 @@ class Register extends Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.onFormSubmit}>
-          <input
-            onChange={e => this.setState({ email: e.target.value })}
-            value={this.state.email}
-            placeholder="Email"
-          />
-          <div>
+        <div>
+          <form onSubmit={this.onFormSubmit}>
+            <h3 style={{ textAlign: "center" }}>Create Your Account</h3>
             <input
-              onChange={e => this.setState({ username: e.target.value })}
-              value={this.state.username}
-              placeholder="Username"
-            />
-          </div>
-          <div>
-            <input
-              placeholder="Password"
-              type="password"
-              onChange={e => this.setState({ password: e.target.value })}
-              value={this.state.password}
+              className="ui medium input"
+              onChange={e => this.setState({ email: e.target.value })}
+              value={this.state.email}
+              placeholder="Email"
             />
             <div>
-              <input type="submit" />
+              <input
+                className="ui medium input"
+                onChange={e => this.setState({ username: e.target.value })}
+                value={this.state.username}
+                placeholder="Username"
+              />
             </div>
-          </div>
-        </form>
+            <div>
+              <input
+                className="ui medium input"
+                placeholder="Password"
+                onChange={e => this.setState({ password: e.target.value })}
+                value={this.state.password}
+              />
+            </div>
+            <div>
+              <button style={{ marginTop: "10px" }} className="mini ui button">
+                Register
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     );
   }

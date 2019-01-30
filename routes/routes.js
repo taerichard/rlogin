@@ -66,21 +66,7 @@ module.exports = app => {
         res.status(400).send(err);
       });
   });
-  // users logging in
-  // app.post("/loggin", function(req, res) {
-  //   const user = {
-  //     name: req.body.name,
-  //     email: req.body.email,
-  //     password: req.body.password
-  //   };
-  //   User.find({ name: user.name, email: user.email, password: user.password })
-  //     .then(user => {
-  //       res.status(200).send(user);
-  //     })
-  //     .catch(err => {
-  //       res.status(500).send({ errorMessage: err });
-  //     });
-  // });
+
   app.post("/loggin", (req, res) => {
     const user = {
       name: req.body.name,

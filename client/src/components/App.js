@@ -1,17 +1,9 @@
 import React, { Component } from "react";
-import Header from "./Header";
 import Register from "./Register";
 import Login from "./Login";
-import Home from "./Home";
 import unsplash from "../api/unsplash";
-import "./regLog.css";
+
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isAuthenticated: false
-    };
-  }
   handleRegisterSubmit = (username, password, email) => {
     unsplash
       .post("/register", {
@@ -32,43 +24,29 @@ class App extends Component {
           email,
           password
         },
-        { auth: "fuck" }
+        { auth: "chicken" }
       )
       .then(response => {
         localStorage.setItem("myToken", response.data[0].token);
         console.log(response.data[0].token);
-        this.setState({ isAuthenticated: true });
       })
       .catch(err => console.log(err));
   };
-  checkAuthentication = () => {
-    if (this.state.isAuthenticated) {
-      return <Home handleLogout={this.handleLogout} />;
-    } else {
-      return (
+
+  render() {
+    return (
+      <div style={{ marginTop: "100px" }} className="ui centered grid">
         <div>
-          <div className="register">
-            <h4 className="register-message">Create Your Account</h4>
+          <div className="six wide tablet eight wide computer column">
             <Register onSubmit={this.handleRegisterSubmit} />
           </div>
-          <div className="loggin">
-            <h4 className="loggin-message">Login With Your Account</h4>
+          <div
+            style={{ marginTop: "40px" }}
+            className="six wide tablet eight wide computer column"
+          >
             <Login onSubmit={this.handleLoginSubmit} />
           </div>
         </div>
-      );
-    }
-  };
-  handleLogout = () => {
-    this.setState({ isAuthenticated: false });
-  };
-  render() {
-    return (
-      <div className="container">
-        <div className="header">
-          <Header />
-        </div>
-        {this.checkAuthentication()}
       </div>
     );
   }
