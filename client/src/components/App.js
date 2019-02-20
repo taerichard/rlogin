@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import Register from "./Register";
 import Login from "./Login";
+import Header from "./Header";
 import unsplash from "../api/unsplash";
-
+import { BrowserRouter } from "react-router-dom";
 class App extends Component {
   handleRegisterSubmit = (username, password, email) => {
     unsplash
@@ -35,18 +36,22 @@ class App extends Component {
 
   render() {
     return (
-      <div style={{ marginTop: "100px" }} className="ui centered grid">
-        <div>
-          <div className="six wide tablet eight wide computer column">
-            <Register onSubmit={this.handleRegisterSubmit} />
+      <div className="ui container">
+        <BrowserRouter>
+          <div>
+            <Header />
+            <div>
+              <div>
+                <div>
+                  <Register onSubmit={this.handleRegisterSubmit} />
+                </div>
+                <div>
+                  <Login onSubmit={this.handleLoginSubmit} />
+                </div>
+              </div>
+            </div>
           </div>
-          <div
-            style={{ marginTop: "40px" }}
-            className="six wide tablet eight wide computer column"
-          >
-            <Login onSubmit={this.handleLoginSubmit} />
-          </div>
-        </div>
+        </BrowserRouter>
       </div>
     );
   }
