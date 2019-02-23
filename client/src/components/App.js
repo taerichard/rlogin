@@ -33,13 +33,16 @@ class App extends Component {
       })
       .catch(err => console.log(err));
   };
-
+  handleHomeClick = event => {
+    event.preventDefault();
+    console.log("clicked");
+  };
   render() {
     return (
       <div className="ui container">
         <BrowserRouter>
           <div>
-            <Header />
+            <Header onClick={this.handleHomeClick} />
             <div>
               <div>
                 <div>

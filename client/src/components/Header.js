@@ -1,11 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Header = () => {
+const Header = props => {
   return (
     <div className="ui secondary pointing menu">
       <Link to="/" className="item">
-        <button>Home</button>
+        <button onClick={props.onClick}>Home</button>
       </Link>
       <div className="right menu">
         <Link to="/" className="item">
